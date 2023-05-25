@@ -30,7 +30,7 @@ jobs:
           region: asia-east2
           entry_point: main
           runtime: python310
-          env_vars_file: ../../env/env.yaml
+          env_vars_file: ${{github.workspace}}/env/env.yaml
           event_trigger_type: providers/cloud.pubsub/eventTypes/topic.publish
           event_trigger_resource: project/${{ secrets.GCP_PROJ_NAME }}/topics/trigger_btc_5min_pipeline
       - name: Deployment has completed
