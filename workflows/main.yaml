@@ -1,0 +1,37 @@
+name: Deploy to Google Cloud Function
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Ready for deployment
+        run: echo Ready for deployment
+      
+      - name: Setup GCloud
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCP_PROJ_NAME  }}
+          service_account_key: ${{ secrets.GCP_CREDENTIAL_KEY  }}
+          export_default_crendentials: true
+
+      - name: Deploy Cloud Functions
+        uses: google-github-actions/deploy-cloud-functions@main
+        with:
+          name: insert_data
+          description: test-description
+          region: asia-east2
+          entry_point: main
+          runtime: python38
+          env_vars_file: /env/env.yaml
+          event_trigger_type: providers/cloud.pubsub/eventTypes/topic.publish
+          event_trigger_resource: project/${{ secrets.GCP_PROJ_NAME }}/topics/trigger_btc_5min_pipeline
+      - name: Deployment has completed
+        run: echo Deployment has completed
