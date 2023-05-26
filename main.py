@@ -1,3 +1,4 @@
+import os
 import requests
 from google.cloud import bigquery
 
@@ -13,7 +14,7 @@ def get_data_api(url) -> dict:
 
     return result
 
-def insert_data(event, context):
+def main(event, context):
 
     client = bigquery.Client()
     dataset_ref = client.dataset(Config.dataset_id)
