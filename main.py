@@ -19,7 +19,7 @@ def main(event, context):
     client = bigquery.Client()
     dataset_ref = client.dataset(Config.dataset_id)
 
-    raw = get_data(Config.url)
+    raw = get_data_api(Config.url)
     record = [(
         raw['time']['updatedISO'],
         raw['bpi']['THB']['rate_float'],
