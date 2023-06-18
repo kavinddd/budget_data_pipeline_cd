@@ -3,8 +3,8 @@ A part of practicing using Github Actions deploy a function on Google Cloud Func
 
 ## Requirements
 - Create a service account with Cloud Function Admin Role from the service provider allowing Github Action to work with cloud services. (In this case, GCP)
-  - Get a key from and encode it with base64.
-  - Put a encoded key in Github SECRET. (GCP_CREDENTIAL_KEY: <GCP_CREDENTIAL_KEY>)
+  - Get a key (generated from the service account) and encode it with base64.
+  - Put the encoded key in Github SECRET. (GCP_CREDENTIAL_KEY: <GCP_CREDENTIAL_KEY>)
 - Setting another Github SECRET (GCP_PROJ_NAME: <project_id>)
 - Manually create a Cloud PUB/SUB and Cloud scheduler to automate triggering the function. (Every 5 minutes in this case)
 - Manually create a table in BigQuery to store a result.
